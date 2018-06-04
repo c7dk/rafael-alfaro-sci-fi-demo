@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(rayOrigin, out hitInfo))
             {
                 Debug.Log("Hit " + hitInfo.transform.name);
-                GameObject tmpMap = (GameObject)Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                StartCoroutine(Spark(tmpMap));
+                Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+               
             }
         }
         else
@@ -67,9 +67,5 @@ public class Player : MonoBehaviour
         _controller.Move(velocity * Time.deltaTime);
     }
 
-    IEnumerator Spark(GameObject hitMark)
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(hitMark);
-    }
+  
 }
