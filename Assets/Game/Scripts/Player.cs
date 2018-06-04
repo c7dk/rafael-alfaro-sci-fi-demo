@@ -12,10 +12,19 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _controller = GetComponent<CharacterController>();
+        //hide cursor
+        Cursor.visible = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //if esc key pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //unhide mouse cursor
+            Cursor.visible = true;
+        }
         CalculateMovement();
 	}
 
