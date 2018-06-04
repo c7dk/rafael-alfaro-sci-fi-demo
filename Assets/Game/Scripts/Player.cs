@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private float _speed = 3.5f;
     private float _gravity = 9.81f;
+    [SerializeField]
+    private GameObject _muzzleFlash;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +17,6 @@ public class Player : MonoBehaviour {
         //hide cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
 	}
 	
 	// Update is called once per frame
@@ -30,6 +31,10 @@ public class Player : MonoBehaviour {
             if(Physics.Raycast(rayOrigin, out hitInfo )){
                 Debug.Log("Hit " + hitInfo.transform.name);
             }
+            _muzzleFlash.SetActive(true);
+        }
+        if(Input.GetMouseButtonUp(0)){
+            _muzzleFlash.SetActive(false);
         }
 
         //if esc key pressed
