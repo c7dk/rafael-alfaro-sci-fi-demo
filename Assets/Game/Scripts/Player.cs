@@ -25,9 +25,10 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             //cast ray from center point of main camera
-            Ray rayOrigin = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
-            if(Physics.Raycast(rayOrigin, Mathf.Infinity)){
-                Debug.Log("Hit Something");
+            Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hitInfo;
+            if(Physics.Raycast(rayOrigin, out hitInfo )){
+                Debug.Log("Hit " + hitInfo.transform.name);
             }
         }
 
