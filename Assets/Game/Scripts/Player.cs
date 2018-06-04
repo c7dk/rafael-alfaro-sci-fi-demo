@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
     private float _gravity = 9.81f;
     [SerializeField]
     private GameObject _muzzleFlash;
+    [SerializeField]
+    private GameObject _hitMarkerPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour {
             RaycastHit hitInfo;
             if(Physics.Raycast(rayOrigin, out hitInfo )){
                 Debug.Log("Hit " + hitInfo.transform.name);
+                Instantiate(_hitMarkerPrefab, hitInfo.point , Quaternion.LookRotation(hitInfo.normal));
             }
         }
         else {

@@ -1140,6 +1140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3.5
   _muzzleFlash: {fileID: 650494232}
+  _hitMarkerPrefab: {fileID: 1278410308571632, guid: 0dca392d0ad60af418c1bace1abde0c6,
+    type: 2}
 --- !u!143 &1752964320
 CharacterController:
   m_ObjectHideFlags: 0
