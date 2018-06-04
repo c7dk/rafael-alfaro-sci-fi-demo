@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     private CharacterController _controller;
     [SerializeField]
@@ -13,16 +14,18 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private GameObject _hitMarkerPrefab;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         _controller = GetComponent<CharacterController>();
         //hide cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         //if left click
         if (Input.GetMouseButton(0))
@@ -31,12 +34,15 @@ public class Player : MonoBehaviour {
             //cast ray from center point of main camera
             Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hitInfo;
-            if(Physics.Raycast(rayOrigin, out hitInfo )){
+            if (Physics.Raycast(rayOrigin, out hitInfo))
+            {
                 Debug.Log("Hit " + hitInfo.transform.name);
-                Instantiate(_hitMarkerPrefab, hitInfo.point , Quaternion.LookRotation(hitInfo.normal));
+                GameObject tmpMap = (GameObject)Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                StartCoroutine(Spark(tmpMap));
             }
         }
-        else {
+        else
+        {
             _muzzleFlash.SetActive(false);
         }
 
@@ -48,9 +54,10 @@ public class Player : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
         }
         CalculateMovement();
-	}
+    }
 
-    void CalculateMovement(){
+    void CalculateMovement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
@@ -58,5 +65,11 @@ public class Player : MonoBehaviour {
         velocity.y -= _gravity;
         velocity = transform.transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    IEnumerator Spark(GameObject hitMark)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(hitMark);
     }
 }
