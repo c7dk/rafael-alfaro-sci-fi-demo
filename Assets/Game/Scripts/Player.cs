@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
         _controller = GetComponent<CharacterController>();
         //hide cursor
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
 	}
 	
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour {
         {
             //unhide mouse cursor
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         CalculateMovement();
 	}
