@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     private bool _isReLoading = false;
 
+    private UIManager _uiManager;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentAmmo = maxAmmo;
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
     void Shoot(){
         _muzzleFlash.SetActive(true);
         currentAmmo--;
+        _uiManager.UpdateAmmo(currentAmmo);
         if (_weaponAudio.isPlaying == false)
         {
             _weaponAudio.Play();
@@ -93,6 +97,7 @@ public class Player : MonoBehaviour
     IEnumerator Reload(){
         yield return new WaitForSeconds(1.5f);
         currentAmmo = maxAmmo;
+        _uiManager.UpdateAmmo(currentAmmo);
         _isReLoading = false;
     }
 
