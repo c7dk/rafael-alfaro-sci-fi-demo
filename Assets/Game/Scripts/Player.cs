@@ -66,6 +66,12 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
         CalculateMovement();
+
+        if(hasCoin == true){
+            _uiManager.UpdateCoin(true);
+        } else {
+            _uiManager.UpdateCoin(false);
+        }
     }
 
     void CalculateMovement()
