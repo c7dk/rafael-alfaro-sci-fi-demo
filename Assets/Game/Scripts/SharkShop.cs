@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SharkShop : MonoBehaviour {
-
-    [SerializeField]
-    private AudioClip _weaponPickUp;
-
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -18,7 +15,7 @@ public class SharkShop : MonoBehaviour {
 	}
 
     //check for collision
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //if player
         if (other.tag == "Player")
@@ -36,9 +33,13 @@ public class SharkShop : MonoBehaviour {
                         player.hasCoin = false;
                         //update inventory
                         UIManager _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-                        _uiManager.RemovedCoin();
+                        if (_uiManager != null)
+                        {
+                            _uiManager.RemoveCoin();
+                        }
                         //play win sound
-                        AudioSource.PlayClipAtPoint(_weaponPickUp, transform.position);
+                        AudioSource audio = GetComponent<AudioSource>();
+                        audio.Play();
 
                     }
                     //else Debug Get out of here!
