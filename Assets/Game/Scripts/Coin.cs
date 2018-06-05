@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : MonoBehaviour {
+    [SerializeField]
+    private AudioClip _coinPickUp;
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -23,13 +25,16 @@ public class Coin : MonoBehaviour {
             //check for e key press
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Picking up coin...");
+                
                 //give player the coin
-                other.gameObject.GetComponent<Player>().hasCoin = true;
-                //play coin sound
-                GetComponent<AudioSource>().Play();
-                //destroy the coin
-                Destroy(this.gameObject, 2.4f);
+                Player player = other.GetComponent<Player>();
+                if(player != null){
+                    player.hasCoin = true;
+                    //play coin sound
+                    AudioSource.PlayClipAtPoint(_coinPickUp, transform.position, 1f);
+                    //destroy the coin
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
