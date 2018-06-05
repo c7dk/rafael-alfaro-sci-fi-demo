@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private Text _ammoText;
     [SerializeField]
-    private GameObject _Coin;
+    private GameObject _coin;
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +24,7 @@ public class UIManager : MonoBehaviour {
         _ammoText.text = "Ammo: " + count;
     }
 
-    public void UpdateCoin(bool hasCoin){
-        if(hasCoin == true){
-            _Coin.SetActive(true);
-        } else {
-            _Coin.SetActive(false);
-        }
+    public void CollectedCoin(){
+        _coin.SetActive(true);
     }
 }
