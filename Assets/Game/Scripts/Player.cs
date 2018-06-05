@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private GameObject _hitMarkerPrefab;
     [SerializeField]
     private AudioSource _weaponAudio;
+    [SerializeField]
+    private int currentAmmo;
+    private int maxAmmo = 50;
 
     // Use this for initialization
     void Start()
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
         //hide cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        currentAmmo = maxAmmo;
     }
 
     // Update is called once per frame
@@ -30,21 +34,9 @@ public class Player : MonoBehaviour
     {
 
         //if left click
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && currentAmmo > 0)
         {
-            _muzzleFlash.SetActive(true);
-            if (_weaponAudio.isPlaying == false) { 
-                _weaponAudio.Play(); 
-            }
-            //cast ray from center point of main camera
-            Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hitInfo;
-            if (Physics.Raycast(rayOrigin, out hitInfo))
-            {
-                Debug.Log("Hit " + hitInfo.transform.name);
-                GameObject hitMarker = (GameObject)Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                Destroy(hitMarker, 1f);
-            }
+            Shoot();
         }
         else
         {
@@ -71,6 +63,24 @@ public class Player : MonoBehaviour
         velocity.y -= _gravity;
         velocity = transform.transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    void Shoot(){
+        _muzzleFlash.SetActive(true);
+        currentAmmo--;
+        if (_weaponAudio.isPlaying == false)
+        {
+            _weaponAudio.Play();
+        }
+        //cast ray from center point of main camera
+        Ray rayOrigin = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hitInfo;
+        if (Physics.Raycast(rayOrigin, out hitInfo))
+        {
+            Debug.Log("Hit " + hitInfo.transform.name);
+            GameObject hitMarker = (GameObject)Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            Destroy(hitMarker, 1f);
+        }
     }
 
 }
