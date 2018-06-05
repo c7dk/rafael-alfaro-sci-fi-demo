@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
             _weaponAudio.Stop();
         }
 
+        if(Input.GetKeyDown(KeyCode.R) && currentAmmo == 0){
+            StartCoroutine("Reload");
+        }
+
         //if esc key pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -81,6 +85,11 @@ public class Player : MonoBehaviour
             GameObject hitMarker = (GameObject)Instantiate(_hitMarkerPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             Destroy(hitMarker, 1f);
         }
+    }
+
+    IEnumerator Reload(){
+        yield return new WaitForSeconds(1.5f);
+        currentAmmo = maxAmmo;
     }
 
 }
