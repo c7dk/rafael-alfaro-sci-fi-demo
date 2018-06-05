@@ -27,4 +27,9 @@ public class UIManager : MonoBehaviour {
     public void CollectedCoin(){
         _coin.SetActive(true);
     }
+
+    public void RemovedCoin()
+    {
+        _coin.SetActive(false);
+    }
 }
