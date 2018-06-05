@@ -40,7 +40,7 @@ public class SharkShop : MonoBehaviour {
                         //play win sound
                         AudioSource audio = GetComponent<AudioSource>();
                         audio.Play();
-
+                        player.EnableWeapons();
                     }
                     //else Debug Get out of here!
                     else {

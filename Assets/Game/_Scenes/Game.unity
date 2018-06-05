@@ -1342,7 +1342,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1303171181363726, guid: 88bae2de7f0014e4fa5e93fd72610be7, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88bae2de7f0014e4fa5e93fd72610be7, type: 2}
@@ -1624,6 +1624,7 @@ MonoBehaviour:
   _weaponAudio: {fileID: 1665471141}
   currentAmmo: 0
   hasCoin: 0
+  _weapon: {fileID: 1665471140}
 --- !u!143 &1752964320
 CharacterController:
   m_ObjectHideFlags: 0

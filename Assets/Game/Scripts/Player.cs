@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
 
     public bool hasCoin = false ;
 
+    [SerializeField]
+    private GameObject _weapon;
+
     // Use this for initialization
     void Start()
     {
@@ -103,6 +106,10 @@ public class Player : MonoBehaviour
         currentAmmo = maxAmmo;
         _uiManager.UpdateAmmo(currentAmmo);
         _isReLoading = false;
+    }
+
+    public void EnableWeapons(){
+        _weapon.SetActive(true);
     }
 
 }
