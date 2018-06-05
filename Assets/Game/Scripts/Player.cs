@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private int currentAmmo;
     private int maxAmmo = 50;
 
+    private bool _isReLoading = false;
+
     // Use this for initialization
     void Start()
     {
@@ -44,7 +46,8 @@ public class Player : MonoBehaviour
             _weaponAudio.Stop();
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && currentAmmo == 0){
+        if(Input.GetKeyDown(KeyCode.R) && _isReLoading == false){
+            _isReLoading = true;
             StartCoroutine("Reload");
         }
 
@@ -90,6 +93,7 @@ public class Player : MonoBehaviour
     IEnumerator Reload(){
         yield return new WaitForSeconds(1.5f);
         currentAmmo = maxAmmo;
+        _isReLoading = false;
     }
 
 }
