@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     {
 
         //if left click
-        if (Input.GetMouseButton(0) && currentAmmo > 0)
+        if (Input.GetMouseButton(0) && currentAmmo > 0 && _weapon.activeSelf == true)
         {
             Shoot();
         }
