@@ -1,10 +1,10 @@
 namespace UnityEngine.PostProcessing
 {
-    public sealed class MinAttribute : PropertyAttribute
+    public sealed class MinAttribute2 : PropertyAttribute
     {
-        public readonly float min;
+        public float min;
 
-        public MinAttribute(float min)
+        public void MinAttribute(float min)
         {
             this.min = min;
         }
